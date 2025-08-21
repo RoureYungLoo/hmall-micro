@@ -14,9 +14,10 @@ import com.hmall.pay.domain.po.PayOrder;
 import com.hmall.pay.enums.PayStatus;
 import com.hmall.pay.mapper.PayOrderMapper;
 import com.hmall.pay.service.IPayOrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -30,6 +31,7 @@ import java.time.LocalDateTime;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> implements IPayOrderService {
 
   // private final IUserService userService;
@@ -47,7 +49,9 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
   }
 
   @Override
-  @Transactional
+  // @Transactional
+  // Seata 全局事务
+  @GlobalTransactional
   public void tryPayOrderByBalance(PayOrderFormDTO payOrderFormDTO) {
     // 1.查询支付单
     PayOrder po = getById(payOrderFormDTO.getId());
@@ -70,6 +74,11 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
     // order.setPayTime(LocalDateTime.now());
     // orderService.updateById(order);
     orderClient.markOrderPaySuccess(po.getBizOrderNo());
+
+    System.out.println("--------------------{} : 准备触发模拟异常");
+    if (true) {
+      throw new RuntimeException("订单支付模拟异常");
+    }
   }
 
   public boolean markPayOrderSuccess(Long id, LocalDateTime successTime) {
