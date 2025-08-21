@@ -16,7 +16,8 @@ import java.util.List;
  *
  * @author luruoyang
  */
-@FeignClient(name = "item-service", path = "/items", fallbackFactory = ItemClientFallbackFactory.class)
+@FeignClient(name = "item-service", path = "/items", /* 降级工厂, 生成降级类 */ fallbackFactory = ItemClientFallbackFactory.class)
+// @FeignClient(name = "item-service", path = "/items", /* 指定降级类 */ fallback = ItemClientDegrade.class)
 public interface ItemClient {
 
   /**

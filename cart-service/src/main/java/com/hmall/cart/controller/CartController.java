@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/carts")
 @RequiredArgsConstructor
+@Slf4j
 public class CartController implements CartClient {
   private final ICartService cartService;
 
@@ -55,6 +57,7 @@ public class CartController implements CartClient {
    * 非熔断限流触发的降级
    */
   public List<CartVO> queryMyCartsFallback(Throwable throwable) {
+    log.info("非熔断限流触发的降级", throwable);
     return Collections.emptyList();
   }
 
@@ -62,6 +65,7 @@ public class CartController implements CartClient {
    * 熔断限流触发的降级
    */
   public List<CartVO> queryMyCartsBlockHandler(BlockException e) {
+    log.info("熔断限流触发的降级", e);
     return Collections.emptyList();
   }
 

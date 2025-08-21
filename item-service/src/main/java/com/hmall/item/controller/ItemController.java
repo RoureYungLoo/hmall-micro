@@ -39,12 +39,15 @@ public class ItemController implements ItemClient {
   @GetMapping
   @Override
   public List<ItemDTO> queryItemByIds(@RequestParam("ids") Collection<Long> ids) {
-    if (false) {
-      throw new RuntimeException("出异常啦~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
 
+    /* 模拟业务异常 */
+    /*if (ids.contains(100000006163L)) {
+      throw new RuntimeException("出异常啦~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }*/
+
+    /* 模拟服务超时 */
 //    try {
-//      TimeUnit.MILLISECONDS.sleep(1000);
+//      TimeUnit.MILLISECONDS.sleep(300);
 //    } catch (InterruptedException e) {
 //      e.printStackTrace();
 //    }

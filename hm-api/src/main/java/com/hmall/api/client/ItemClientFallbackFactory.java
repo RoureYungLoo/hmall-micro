@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * ItemClient 降级工厂
+ * 方式二: 降级工厂实现 FallbackFactory
  *
  * @author luruoyang
  */
@@ -20,6 +20,7 @@ import java.util.List;
 public class ItemClientFallbackFactory implements FallbackFactory<ItemClient> {
   @Override
   public ItemClient create(Throwable cause) {
+    // 降级类
     return new ItemClient() {
       @Override
       public List<ItemDTO> queryItemByIds(Collection<Long> ids) {

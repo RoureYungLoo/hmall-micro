@@ -53,12 +53,12 @@ feign:
     enabled: true
   sentinel:
     enabled: true
-  # Feign Client Timeout
-  #  client:
-  #    config:
-  #      default:
-  #        connect-timeout: 2000
-  #        read-timeout: 2000
+#     Feign Client Timeout
+#  client:
+#    config:
+#      default:
+#        read-timeout: 2000
+
 
 
 seata:
