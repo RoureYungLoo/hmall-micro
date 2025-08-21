@@ -12,9 +12,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * ItemClient 远程调用客户端
+ *
  * @author luruoyang
  */
-@FeignClient(name = "item-service", path = "/items")
+@FeignClient(name = "item-service", path = "/items", fallbackFactory = ItemClientFallbackFactory.class)
 public interface ItemClient {
 
   /**

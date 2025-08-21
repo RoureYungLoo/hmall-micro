@@ -3,7 +3,6 @@ package com.hmall.order.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmall.api.client.CartClient;
 import com.hmall.api.client.ItemClient;
-import com.hmall.api.client.OrderClient;
 import com.hmall.api.client.dto.ItemDTO;
 import com.hmall.api.client.dto.OrderDetailDTO;
 import com.hmall.api.client.po.Order;
@@ -14,9 +13,9 @@ import com.hmall.order.domain.po.OrderDetail;
 import com.hmall.order.mapper.OrderMapper;
 import com.hmall.order.service.IOrderDetailService;
 import com.hmall.order.service.IOrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,7 +44,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
   private final CartClient cartClient;
 
   @Override
-  @Transactional
+  // @Transactional
+  // seata 全局事务
+  @GlobalTransactional
   public Long createOrder(OrderFormDTO orderFormDTO) {
     // 1.订单数据
     Order order = new Order();
@@ -85,6 +86,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
       itemClient.deductStock(detailDTOS);
     } catch (Exception e) {
       throw new RuntimeException("库存不足！");
+    }
+
+    // 模拟异常, 订单创建回滚
+    if (false) {
+      throw new RuntimeException("订单创建异常");
     }
     return order.getId();
   }

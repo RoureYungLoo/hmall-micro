@@ -1,6 +1,8 @@
 package com.hmall.cart.controller;
 
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.hmall.api.client.CartClient;
 import com.hmall.cart.domain.dto.CartFormDTO;
 import com.hmall.cart.domain.po.Cart;
@@ -14,6 +16,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @Api(tags = "购物车相关接口")
@@ -43,8 +46,23 @@ public class CartController implements CartClient {
 
   @ApiOperation("查询购物车列表")
   @GetMapping
+  @SentinelResource(value = "queryMyCarts", fallback = "queryMyCartsFallback", blockHandler = "queryMyCartsBlockHandler")
   public List<CartVO> queryMyCarts() {
     return cartService.queryMyCarts();
+  }
+
+  /**
+   * 非熔断限流触发的降级
+   */
+  public List<CartVO> queryMyCartsFallback(Throwable throwable) {
+    return Collections.emptyList();
+  }
+
+  /**
+   * 熔断限流触发的降级
+   */
+  public List<CartVO> queryMyCartsBlockHandler(BlockException e) {
+    return Collections.emptyList();
   }
 
   @ApiOperation("批量删除购物车中商品")

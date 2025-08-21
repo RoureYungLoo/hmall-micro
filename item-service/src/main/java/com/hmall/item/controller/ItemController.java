@@ -39,6 +39,16 @@ public class ItemController implements ItemClient {
   @GetMapping
   @Override
   public List<ItemDTO> queryItemByIds(@RequestParam("ids") Collection<Long> ids) {
+    if (false) {
+      throw new RuntimeException("出异常啦~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+//    try {
+//      TimeUnit.MILLISECONDS.sleep(1000);
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
+//    }
+
     return itemService.queryItemByIds(ids);
   }
 
