@@ -69,15 +69,21 @@
       <option name="ignoredModules">
         <list>
           <option value="item-service" />
+          <option value="hm-api" />
+          <option value="hm-api" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="cn.hutool:hutool-all:5.8.11" />
+          <option value="ch.qos.logback:logback-classic:1.2.12" />
+          <option value="com.squareup.okio:okio:2.8.0" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>

@@ -18,13 +18,13 @@
     </properties>
 
     <dependencies>
-        <!--common-->
+        <!-- Common -->
         <dependency>
             <groupId>com.hmall</groupId>
             <artifactId>hm-common</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <!--web-->
+        <!-- Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -39,25 +39,41 @@
             <artifactId>spring-security-rsa</artifactId>
             <version>1.0.9.RELEASE</version>
         </dependency>
-        <!--数据库-->
+        <!-- MySQL Driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--mybatis-->
+        <!-- MyBatis -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-        <!--单元测试-->
+        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-        <!--redis-->
+        <!-- Redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- Nacos discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>com.alibaba.nacos</groupId>-->
+            <!--                    <artifactId>nacos-client</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>com.hmall</groupId>
+            <artifactId>hm-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>

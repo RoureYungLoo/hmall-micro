@@ -3,21 +3,25 @@ package com.hmall.cart.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hmall.common.utils.BeanUtils;
-import com.hmall.common.utils.CollUtils;
-import com.hmall.common.utils.UserContext;
+import com.hmall.api.client.ItemClient;
+import com.hmall.api.client.dto.ItemDTO;
 import com.hmall.cart.domain.dto.CartFormDTO;
-import com.hmall.cart.domain.dto.ItemDTO;
 import com.hmall.cart.domain.po.Cart;
 import com.hmall.cart.domain.vo.CartVO;
 import com.hmall.cart.mapper.CartMapper;
 import com.hmall.cart.service.ICartService;
 import com.hmall.common.exception.BizIllegalException;
+import com.hmall.common.utils.BeanUtils;
+import com.hmall.common.utils.CollUtils;
+import com.hmall.common.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -76,19 +80,25 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     return vos;
   }
 
+  // 构造注入
   private final RestTemplate restTemplate;
+
+  // 构造注入
+  private final ItemClient itemClient;
 
   private void handleCartItems(List<CartVO> vos) {
     // 1.获取商品id
     Set<Long> itemIds = vos.stream().map(CartVO::getItemId).collect(Collectors.toSet());
     // 2.查询商品
-    //List<ItemDTO> items = itemService.queryItemByIds(itemIds);
+    // List<ItemDTO> items = itemService.queryItemByIds(itemIds);
 
-    ItemDTO[] itemDTOS = restTemplate.getForObject(
-        String.format("http://127.0.0.1:8081/items?ids=%s", CollUtils.join(itemIds, ","))
-        , ItemDTO[].class);
+    // ItemDTO[] itemDTOS = restTemplate.getForObject(
+    //    String.format("http://item-service/items?ids=%s", CollUtils.join(itemIds, ","))
+    //    , ItemDTO[].class);
+    List<ItemDTO> itemDTOList = itemClient.queryItemByIds(itemIds);
 
-    List<ItemDTO> items = Arrays.asList(itemDTOS);
+    // List<ItemDTO> items = Arrays.asList(itemDTOS);
+    List<ItemDTO> items = itemDTOList;
     if (CollUtils.isEmpty(items)) {
       return;
     }

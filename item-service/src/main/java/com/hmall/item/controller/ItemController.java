@@ -2,11 +2,12 @@ package com.hmall.item.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hmall.api.client.ItemClient;
+import com.hmall.api.client.dto.ItemDTO;
+import com.hmall.api.client.dto.OrderDetailDTO;
 import com.hmall.common.domain.PageDTO;
 import com.hmall.common.domain.PageQuery;
 import com.hmall.common.utils.BeanUtils;
-import com.hmall.item.domain.dto.ItemDTO;
-import com.hmall.item.domain.dto.OrderDetailDTO;
 import com.hmall.item.domain.po.Item;
 import com.hmall.item.service.IItemService;
 import io.swagger.annotations.Api;
@@ -21,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
-public class ItemController {
+public class ItemController implements ItemClient {
 
   private final IItemService itemService;
 
@@ -36,6 +37,7 @@ public class ItemController {
 
   @ApiOperation("根据id批量查询商品")
   @GetMapping
+  @Override
   public List<ItemDTO> queryItemByIds(@RequestParam("ids") Collection<Long> ids) {
     return itemService.queryItemByIds(ids);
   }
@@ -79,6 +81,7 @@ public class ItemController {
 
   @ApiOperation("批量扣减库存")
   @PutMapping("/stock/deduct")
+  @Override
   public void deductStock(@RequestBody List<OrderDetailDTO> items) {
     itemService.deductStock(items);
   }

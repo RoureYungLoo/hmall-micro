@@ -12,6 +12,10 @@
         <module>hm-common</module>
         <module>item-service</module>
         <module>cart-service</module>
+        <module>hm-api</module>
+        <module>user-service</module>
+        <module>order-service</module>
+        <module>pay-service</module>
     </modules>
 
     <parent>
@@ -26,9 +30,10 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <org.projectlombok.version>1.18.20</org.projectlombok.version>
+        <org.projectlombok.version>1.18.26</org.projectlombok.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <nacos.client.version>2.4.0</nacos.client.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <hutool.version>5.8.11</hutool.version>
         <mysql.version>8.0.23</mysql.version>
@@ -74,6 +79,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <!-- lombok 管理 -->
         <dependency>
@@ -86,6 +92,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!-- Nacos Client -->
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>${nacos.client.version}</version>
         </dependency>
     </dependencies>
 

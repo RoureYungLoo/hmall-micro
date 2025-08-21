@@ -1,4 +1,4 @@
-package com.hmall.item.domain.dto;
+package com.hmall.api.client.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,8 +9,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class OrderDetailDTO {
-  @ApiModelProperty("商品id")
-  private Long itemId;
-  @ApiModelProperty("商品购买数量")
-  private Integer num;
+    @ApiModelProperty("商品id")
+    private Long itemId;
+    @ApiModelProperty("商品购买数量")
+    private Integer num;
 }
