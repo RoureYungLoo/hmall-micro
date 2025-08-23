@@ -75,10 +75,10 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
     // orderService.updateById(order);
     orderClient.markOrderPaySuccess(po.getBizOrderNo());
 
-    System.out.println("--------------------{} : 准备触发模拟异常");
-    if (true) {
-      throw new RuntimeException("订单支付模拟异常");
-    }
+//    System.out.println("--------------------{} : 准备触发模拟异常");
+//    if (true) {
+//      throw new RuntimeException("订单支付模拟异常");
+//    }
   }
 
   public boolean markPayOrderSuccess(Long id, LocalDateTime successTime) {

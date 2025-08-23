@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>user-service</artifactId>
+    <artifactId>trade-service</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -27,16 +27,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--加密-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-crypto</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-rsa</artifactId>
-            <version>1.0.9.RELEASE</version>
         </dependency>
         <!--数据库-->
         <dependency>
@@ -58,13 +48,20 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!-- seata-->
+
+        <dependency>
+            <groupId>com.hmall</groupId>
+            <artifactId>hm-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--seata-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
         </dependency>
         <!--nacos配置管理，包括nacos-client等-->
         <dependency>
+
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
@@ -72,11 +69,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hmall</groupId>
-            <artifactId>hm-api</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>
